@@ -4,7 +4,6 @@ description = "Multi-commodity Capacitated Network Design"
 version = "0.0.1"
 requires-python = ">=3.9, <3.13"
 maintainers = [{ name = "Marc Bataillou Almagro", email = "marc.bataillou@gmail.com" }]
-
 dependencies = [
   "polars",
   "numpy",
@@ -22,22 +21,13 @@ test = [
   "ruff",
   "xdoctest",
 ]
-sphinx = [
-  "numpydoc",
-  "polars",
-  "pydata-sphinx-theme",
-  "sentence-transformers",
-  "sphinx-copybutton",
-  "sphinx-design",
-  "sphinx-gallery",
-  "sphinx-tabs",
-  "sphinx<8.2.0",
-  "sphinx_autosummary_accessors",
-]
 dev = [
   "nbformat",
   "ipykernel",
 ]
+
+[dependency-groups]
+notebook = ["marimo", "matplotlib", "seaborn"]
 
 [build-system]
 requires = ["uv-build"]
@@ -62,7 +52,7 @@ concurrency = ["thread", "multiprocessing"]
 parallel = true
 
 [tool.coverage.report]
-omit = ["*/externals/*", "src/*", "tests/*"]
+omit = ["*/externals/*", "src/*", "tests/*", "notebooks/*"]
 show_missing = true
 
 [tool.ruff]
@@ -98,4 +88,4 @@ convention = "numpy"
 
 [tool.mypy]
 ignore_missing_imports = true
-exclude = ["tests/*"]
+exclude = ["tests/*", "notebooks/*"]
