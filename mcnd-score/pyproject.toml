@@ -1,0 +1,101 @@
+[project]
+name = "mcnd_score"
+description = "Multi-commodity Capacitated Network Design"
+version = "0.0.1"
+requires-python = ">=3.9, <3.13"
+maintainers = [{ name = "Marc Bataillou Almagro", email = "marc.bataillou@gmail.com" }]
+
+dependencies = [
+  "polars",
+  "numpy",
+]
+
+[project.optional-dependencies]
+test = [
+  "polars",
+  "pre-commit",
+  "pytest",
+  "pytest-cov",
+  "pytest-order",
+  "pytest-randomly",
+  "pytest-xdist",
+  "ruff",
+  "xdoctest",
+]
+sphinx = [
+  "numpydoc",
+  "polars",
+  "pydata-sphinx-theme",
+  "sentence-transformers",
+  "sphinx-copybutton",
+  "sphinx-design",
+  "sphinx-gallery",
+  "sphinx-tabs",
+  "sphinx<8.2.0",
+  "sphinx_autosummary_accessors",
+]
+dev = [
+  "nbformat",
+  "ipykernel",
+]
+
+[build-system]
+requires = ["uv-build"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+addopts = [
+  "--xdoctest",
+  "--import-mode=importlib",
+  "--no-header",
+  "--verbosity=2",
+  "--ignore=doc",
+  "--ignore=examples",
+  "--ignore=notebooks",
+  "--dist=loadscope",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["mcnd_score"]
+concurrency = ["thread", "multiprocessing"]
+parallel = true
+
+[tool.coverage.report]
+omit = ["*/externals/*", "src/*", "tests/*"]
+show_missing = true
+
+[tool.ruff]
+src = ["mcnd_score"]
+exclude = ["doc"]
+
+[tool.ruff.lint]
+select = [
+  # pycodestyle
+  "E",
+  # Pyflakes
+  "F",
+  # pyupgrade
+  "UP",
+  # flake8-bugbear
+  "B",
+  # flake8-simplify
+  "SIM",
+  # flake8-print
+  "T",
+  # isort
+  "I",
+  # pydocstyle
+  "D",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+"src/*" = ["UP007"]
+"tests/*" = ["D"]
+
+[tool.mypy]
+ignore_missing_imports = true
+exclude = ["tests/*"]
